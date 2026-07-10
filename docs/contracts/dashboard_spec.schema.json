@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hendrixtlan/semantic-selfservice-agents/docs/contracts/dashboard_spec.schema.json",
+  "title": "DashboardSpec",
+  "description": "Definición declarativa de un dashboard Malloy: un query raíz con vistas anidadas y tags de render. Producido por el Dashboarder. El artefacto final es texto compilable — el Validator lo verifica sin ejecutarlo.",
+  "type": "object",
+  "required": ["spec_version", "package", "name", "root_source", "panels", "malloy_path"],
+  "properties": {
+    "spec_version": { "const": "1.0" },
+    "package": { "type": "string" },
+    "name": { "type": "string", "examples": ["ventas_semanales_por_region"] },
+    "title": { "type": "string" },
+    "root_source": { "type": "string", "description": "Source Malloy sobre el que corre el query raíz" },
+    "filters": { "type": "array", "items": { "type": "string" }, "description": "Cláusulas where en sintaxis Malloy" },
+    "panels": {
+      "type": "array", "minItems": 1,
+      "description": "Cada panel es una vista anidada (nest:) con su tag de render",
+      "items": {
+        "type": "object",
+        "required": ["name", "render", "view"],
+        "properties": {
+          "name": { "type": "string" },
+          "render": { "enum": ["table", "bar_chart", "line_chart", "scatter_chart", "shape_map", "segment_map", "list", "list_detail"] },
+          "view": { "type": "string", "description": "Cuerpo de la vista en Malloy (group_by / aggregate / order_by / top)" }
+        }
+      }
+    },
+    "malloy_path": { "type": "string", "examples": ["semantic/packages/ventas/dashboards/ventas_semanales.malloy"] },
+    "alerts": {
+      "type": "array",
+      "description": "Roadmap §9: umbrales evaluados por Cloud Scheduler + Dashboarder",
+      "items": {
+        "type": "object",
+        "required": ["measure", "operator", "threshold", "notify"],
+        "properties": {
+          "measure": { "type": "string" },
+          "operator": { "enum": ["gt", "lt", "gte", "lte", "eq"] },
+          "threshold": { "type": "number" },
+          "notify": { "type": "string", "description": "canal (email, chat webhook)" }
+        }
+      }
+    },
+    "validation": { "$ref": "source_spec.schema.json#/properties/validation" },
+    "pr_ref": { "type": "string" }
+  }
+}

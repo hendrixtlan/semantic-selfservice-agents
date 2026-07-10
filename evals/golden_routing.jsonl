@@ -1,0 +1,8 @@
+{"pregunta": "¿Cuánto vendimos por región el mes pasado?", "esperado": "dashboarder"}
+{"pregunta": "¿Qué campos de ventas por canal tenemos?", "esperado": "resolver"}
+{"pregunta": "Agrega margen neto como métrica al modelo de ventas", "esperado": "modeler"}
+{"pregunta": "Quiero un tablero semanal de ingresos por canal", "esperado": "dashboarder"}
+{"pregunta": "¿Qué significa ticket promedio en nuestros datos?", "esperado": "resolver"}
+{"pregunta": "Predice qué clientes van a cancelar", "esperado": "out_of_domain:ds-lab-agents"}
+{"pregunta": "¿Cuántos pedidos con cupón VERANO25 hubo en marzo? Es una duda puntual", "esperado": "out_of_domain:bq-adhoc-agents"}
+{"pregunta": "Cambia el join de ventas con regiones a many", "esperado": "modeler"}

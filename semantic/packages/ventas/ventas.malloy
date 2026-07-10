@@ -1,0 +1,23 @@
+// Modelo semántico de ventas — fuente de verdad: este repo.
+// Cambios solo vía PR con SourceSpec en el cuerpo (ver docs/contracts/).
+// catalog-first: cada campo referencia una entrada de Dataplex en su SourceSpec de origen.
+
+source: regiones is bigquery.table('TU_PROYECTO.gobernado.regiones') extend {
+  primary_key: region_id
+  dimension: nombre_region is nombre
+}
+
+source: ventas is bigquery.table('TU_PROYECTO.gobernado.ventas') extend {
+  join_one: regiones on region_id = regiones.region_id
+
+  dimension:
+    semana is fecha.week
+    mes is fecha.month
+    canal_normalizado is upper(canal)
+
+  measure:
+    ingresos is monto.sum()
+    pedidos is count()
+    ticket_promedio is monto.avg()
+    // margen_neto: pendiente — ejemplo de cambio que entra por PR con SourceSpec
+}

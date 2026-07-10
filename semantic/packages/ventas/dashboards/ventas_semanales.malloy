@@ -1,0 +1,28 @@
+// DashboardSpec: ventas_semanales_por_region
+// Un dashboard Malloy es UN query: vistas anidadas + tags de render.
+// Generado por el agente Dashboarder; aprobado vía PR.
+
+import "../ventas.malloy"
+
+# dashboard
+run: ventas -> {
+  group_by: regiones.nombre_region
+
+  # line_chart
+  nest: tendencia_semanal is {
+    group_by: semana
+    aggregate: ingresos
+    order_by: semana asc
+  }
+
+  # bar_chart
+  nest: por_canal is {
+    group_by: canal_normalizado
+    aggregate: ingresos, pedidos
+  }
+
+  # table
+  nest: resumen is {
+    aggregate: ingresos, pedidos, ticket_promedio
+  }
+}

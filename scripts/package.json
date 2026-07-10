@@ -1,0 +1,9 @@
+{
+  "name": "malloy-compile-gate",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@malloydata/malloy": "latest",
+    "@malloydata/db-bigquery": "latest"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "ventas",
+  "version": "0.1.0",
+  "description": "Modelo semántico gobernado de ventas. Cambios solo vía PR (proponer/aprobar/aplicar)."
+}

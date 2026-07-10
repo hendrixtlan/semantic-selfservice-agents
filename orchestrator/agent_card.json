@@ -1,0 +1,14 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "semantic-selfservice-agents",
+  "description": "BI self-service gobernado con Malloy: resuelve términos contra el catálogo, propone cambios al modelo semántico vía PR y construye dashboards (queries anidados con render tags) servidos por Malloy Publisher. Ejecución de datos con EUC.",
+  "url": "https://REEMPLAZAR.run.app",
+  "capabilities": { "streaming": true },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "skills": [
+    { "id": "resolve", "name": "Descubrimiento de catálogo", "description": "Términos de negocio -> activos Dataplex", "tags": ["catalog", "dataplex"] },
+    { "id": "model", "name": "Evolución del modelo semántico", "description": "Propone sources/dimensiones/medidas .malloy vía PR (SourceSpec)", "tags": ["malloy", "semantic-model", "governance"] },
+    { "id": "dashboard", "name": "Construcción de dashboards", "description": "Queries anidados con tags de render, validados por compilación (DashboardSpec)", "tags": ["malloy", "dashboards"] }
+  ]
+}

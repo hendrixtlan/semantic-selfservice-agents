@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hendrixtlan/semantic-selfservice-agents/docs/contracts/source_spec.schema.json",
+  "title": "SourceSpec",
+  "description": "Propuesta de cambio al modelo semántico Malloy. Producido por el Modeler, validado por el Validator, aprobado por un steward vía PR. Transporta referencias, nunca datos.",
+  "type": "object",
+  "required": ["spec_version", "package", "source_name", "change_type", "catalog_refs", "malloy_path", "rationale"],
+  "properties": {
+    "spec_version": { "const": "1.0" },
+    "package": { "type": "string", "description": "Nombre del package en semantic/packages/", "examples": ["ventas"] },
+    "source_name": { "type": "string", "description": "Nombre del source Malloy afectado", "examples": ["ventas"] },
+    "change_type": { "enum": ["create_source", "add_dimension", "add_measure", "add_join", "modify", "deprecate"] },
+    "catalog_refs": {
+      "type": "array", "minItems": 1,
+      "description": "Activos de Dataplex que respaldan el cambio (catalog-first: sin ref no hay cambio)",
+      "items": {
+        "type": "object",
+        "required": ["fqn", "entry_id"],
+        "properties": {
+          "fqn": { "type": "string", "examples": ["proyecto.dataset.ventas"] },
+          "entry_id": { "type": "string", "description": "ID de la entrada en Dataplex" },
+          "columns": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "malloy_path": { "type": "string", "description": "Ruta del archivo .malloy dentro del repo", "examples": ["semantic/packages/ventas/ventas.malloy"] },
+    "additions": {
+      "type": "object",
+      "properties": {
+        "dimensions": { "type": "array", "items": { "$ref": "#/$defs/field" } },
+        "measures": { "type": "array", "items": { "$ref": "#/$defs/field" } },
+        "joins": { "type": "array", "items": {
+          "type": "object",
+          "required": ["target_source", "relationship", "on"],
+          "properties": {
+            "target_source": { "type": "string" },
+            "relationship": { "enum": ["one", "many", "cross"] },
+            "on": { "type": "string" }
+          }
+        } }
+      }
+    },
+    "rationale": { "type": "string", "description": "Justificación en lenguaje de negocio (va al cuerpo del PR)" },
+    "validation": {
+      "type": "object",
+      "description": "Rellenado por el Validator antes de abrir el PR",
+      "properties": {
+        "compiles": { "type": "boolean" },
+        "dry_run_ok": { "type": "boolean" },
+        "estimated_bytes_processed": { "type": "integer" },
+        "validated_at": { "type": "string", "format": "date-time" },
+        "validated_as": { "type": "string", "description": "email del usuario cuyo token EUC se usó para el dry-run" }
+      }
+    },
+    "pr_ref": { "type": "string", "description": "URL del PR una vez abierto" }
+  },
+  "$defs": {
+    "field": {
+      "type": "object",
+      "required": ["name", "expr"],
+      "properties": {
+        "name": { "type": "string" },
+        "expr": { "type": "string", "description": "Expresión Malloy" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}

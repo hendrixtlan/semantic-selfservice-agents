@@ -1,0 +1,20 @@
+{
+  "projects": [
+    {
+      "name": "default",
+      "connections": [
+        {
+          "name": "bq_steward_ro",
+          "type": "bigquery",
+          "bigqueryConnection": {
+            "defaultProjectId": "TU_PROYECTO",
+            "billingProjectId": "TU_PROYECTO"
+          }
+        }
+      ],
+      "packages": [
+        { "name": "ventas", "location": "./packages/ventas" }
+      ]
+    }
+  ]
+}

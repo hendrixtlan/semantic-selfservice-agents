@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 700" role="img">
+  <title>semantic-selfservice-agents architecture</title>
+  <desc>User, orchestrator on Agent Engine, four specialists on Cloud Run, and the governance layer: Dataplex, GitHub, Malloy Publisher and BigQuery. The EUC chain (user token) is highlighted in amber.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1.5L8 5L2 8.5" fill="none" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ae" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1.5L8 5L2 8.5" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .name { font: 600 14px ui-monospace, 'SF Mono', Menlo, Consolas, monospace; fill: #26303B; }
+      .sub  { font: 400 11px ui-monospace, 'SF Mono', Menlo, Consolas, monospace; fill: #64748B; }
+      .lbl  { font: 500 11px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #64748B; }
+      .grp  { font: 600 11px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #94A3B8; letter-spacing: .08em; }
+      .eucT { font: 600 11px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #B45309; }
+      .box  { fill: #FFFFFF; stroke: #94A3B8; stroke-width: 1; rx: 8; }
+      .agent{ fill: #FFFFFF; stroke: #0E7490; stroke-width: 1.3; rx: 8; }
+      .store{ fill: #F8FAFC; stroke: #94A3B8; stroke-width: 1; rx: 8; }
+      .flow { stroke: #94A3B8; stroke-width: 1.3; fill: none; }
+      .euc  { stroke: #B45309; stroke-width: 2.6; fill: none; stroke-dasharray: 7 4; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="720" height="700" fill="#FBFCFD"/>
+  <text class="grp" x="20" y="26">SEMANTIC-SELFSERVICE-AGENTS · ARCHITECTURE</text>
+
+  <!-- Usuario -->
+  <rect class="box" x="260" y="40" width="200" height="46" rx="23"/>
+  <text class="name" x="360" y="59" text-anchor="middle">User</text>
+  <text class="sub"  x="360" y="76" text-anchor="middle">GE / A2UI · OAuth session</text>
+
+  <!-- EUC: Usuario -> Orquestador -->
+  <path class="euc" d="M360 86 V126" marker-end="url(#ae)"/>
+
+  <!-- Agent Engine -->
+  <rect x="212" y="128" width="296" height="80" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="4 4"/>
+  <text class="grp" x="226" y="146">VERTEX AI AGENT ENGINE</text>
+  <rect class="agent" x="240" y="154" width="240" height="44" rx="8"/>
+  <text class="name" x="360" y="172" text-anchor="middle" fill="#0E7490">orquestador</text>
+  <text class="sub"  x="360" y="188" text-anchor="middle">classifies · delegates A2A · bounces</text>
+
+  <!-- Fan-out A2A a especialistas -->
+  <path class="flow" d="M300 208 C300 232 111 236 111 264" marker-end="url(#a)"/>
+  <path class="flow" d="M340 208 C340 236 281 240 281 264" marker-end="url(#a)"/>
+  <path class="flow" d="M420 208 C420 236 619 236 619 264" marker-end="url(#a)"/>
+  <text class="lbl" x="188" y="238">A2A ×4</text>
+
+  <!-- EUC: Orquestador -> Dashboarder -->
+  <path class="euc" d="M380 208 C380 238 455 238 455 264" marker-end="url(#ae)"/>
+
+  <!-- Cloud Run -->
+  <rect x="16" y="252" width="688" height="122" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="4 4"/>
+  <text class="grp" x="30" y="270">CLOUD RUN · INTERNAL INGRESS</text>
+
+  <rect class="agent" x="36" y="284" width="150" height="66"/>
+  <text class="name" x="111" y="308" text-anchor="middle" fill="#0E7490">resolver</text>
+  <text class="sub"  x="111" y="326" text-anchor="middle">catalog-first</text>
+
+  <rect class="agent" x="206" y="284" width="150" height="66"/>
+  <text class="name" x="281" y="308" text-anchor="middle" fill="#0E7490">modeler</text>
+  <text class="sub"  x="281" y="326" text-anchor="middle">.malloy → PR</text>
+
+  <rect class="agent" x="376" y="284" width="158" height="66"/>
+  <text class="name" x="455" y="308" text-anchor="middle" fill="#0E7490">dashboarder</text>
+  <text class="sub"  x="455" y="326" text-anchor="middle">nest + render tags</text>
+
+  <rect class="agent" x="554" y="284" width="130" height="66"/>
+  <text class="name" x="619" y="308" text-anchor="middle" fill="#0E7490">validator</text>
+  <text class="sub"  x="619" y="326" text-anchor="middle">compiles · dry-run</text>
+
+  <!-- Flujos hacia la capa de gobierno -->
+  <path class="flow" d="M111 350 V486" marker-end="url(#a)"/>
+  <text class="lbl" x="120" y="420">resolves</text>
+
+  <path class="flow" d="M281 350 V486" marker-end="url(#a)"/>
+  <text class="lbl" x="290" y="412">PR</text>
+  <text class="lbl" x="290" y="426">(propose)</text>
+
+  <path class="flow" d="M430 350 C430 420 462 440 468 486" marker-end="url(#a)"/>
+  <text class="lbl" x="392" y="420">MCP:</text>
+  <text class="lbl" x="392" y="434">compile</text>
+
+  <path class="flow" d="M619 350 C619 400 630 440 634 486" stroke-dasharray="3 4" marker-end="url(#a)"/>
+  <text class="lbl" x="643" y="420">dry-run</text>
+  <text class="lbl" x="643" y="434">EUC</text>
+
+  <!-- EUC: Dashboarder -> BigQuery -->
+  <path class="euc" d="M492 350 C540 410 590 440 616 486" marker-end="url(#ae)"/>
+  <text class="eucT" x="512" y="404">compiled SQL</text>
+  <text class="eucT" x="512" y="419">+ user token</text>
+
+  <!-- Capa de gobierno -->
+  <rect class="store" x="36" y="488" width="150" height="64"/>
+  <text class="name" x="111" y="512" text-anchor="middle">Dataplex</text>
+  <text class="sub"  x="111" y="530" text-anchor="middle">catalog</text>
+
+  <rect class="store" x="206" y="488" width="150" height="64"/>
+  <text class="name" x="281" y="512" text-anchor="middle">GitHub</text>
+  <text class="sub"  x="281" y="530" text-anchor="middle">semantic/*.malloy</text>
+
+  <path class="flow" d="M356 520 H388" marker-end="url(#a)"/>
+  <text class="lbl" x="332" y="574">CI compiles &amp; applies</text>
+
+  <rect class="store" x="390" y="488" width="160" height="64"/>
+  <text class="name" x="470" y="512" text-anchor="middle">Publisher</text>
+  <text class="sub"  x="470" y="530" text-anchor="middle">REST :4000 · MCP :4040</text>
+
+  <rect class="store" x="572" y="488" width="130" height="64"/>
+  <text class="name" x="637" y="512" text-anchor="middle">BigQuery</text>
+  <text class="sub"  x="637" y="530" text-anchor="middle">RLS/CLS apply</text>
+
+  <!-- Leyenda -->
+  <line x1="36" y1="626" x2="76" y2="626" class="euc"/>
+  <text class="eucT" x="86" y="630">EUC chain — the user's OAuth token travels intact all the way to BigQuery</text>
+  <line x1="36" y1="652" x2="76" y2="652" class="flow"/>
+  <text class="lbl" x="86" y="656">control &amp; metadata flows (A2A, MCP, PRs) — never inline data</text>
+  <line x1="36" y1="678" x2="76" y2="678" class="flow" stroke-dasharray="3 4"/>
+  <text class="lbl" x="86" y="682">verification under the user's identity (validator dry-run)</text>
+</svg>
