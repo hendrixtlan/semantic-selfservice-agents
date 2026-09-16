@@ -4,8 +4,6 @@
 
 **Self-service BI agent squad with [Malloy](https://github.com/malloydata/malloy) as the semantic layer, on Google Cloud.**
 
-Git-native variant of [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents): same slot in the ecosystem (governed data → dashboards), swapping Looker/LookML for Malloy + Malloy Publisher. Lives alongside [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) (long tail → ephemeral SQL) and [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents) (inference and prediction).
-
 Built with **Google ADK**, exposed via **A2A** and **A2UI**, orchestrated from **Vertex AI Agent Engine**, with specialists on **Cloud Run** (internal ingress), semantic-model governance through the **propose / approve / apply** pattern over Git, and end-to-end execution under the user's identity (**EUC**).
 
 ---
@@ -240,7 +238,3 @@ Cross-squad environment variables: this repo exposes `SEMANTIC_ORCHESTRATOR_URL`
 The triangle still closes: *"predict churn and put the result in a weekly dashboard"* → the hub sequences `ds-lab-agents` (scoring into a BQ table) → this squad (Modeler adds the source, Dashboarder builds the board). The hub's `PlanSpec` references the scoring table's FQN; nothing travels inline.
 
 ---
-
-## Author
-
-**Jose Maldonado** ([@joseimj](https://github.com/joseimj)) — also the author of the sibling systems [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents), [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) and [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents).
