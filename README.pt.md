@@ -4,8 +4,6 @@
 
 **Esquadrão de agentes de BI self-service com [Malloy](https://github.com/malloydata/malloy) como camada semântica, no Google Cloud.**
 
-Variante Git-nativa do [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents): mesmo papel no ecossistema (dado governado → dashboards), substituindo Looker/LookML por Malloy + Malloy Publisher. Convive com o [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) (cauda longa → SQL efêmero) e o [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents) (inferência e predição).
-
 Construído com **Google ADK**, exposto via **A2A** e **A2UI**, orquestrado a partir do **Vertex AI Agent Engine**, com especialistas no **Cloud Run** (ingress interno), governança do modelo semântico pelo padrão **propor / aprovar / aplicar** sobre Git, e execução com a identidade do usuário (**EUC**) de ponta a ponta.
 
 ---
@@ -242,5 +240,3 @@ O fechamento do triângulo se mantém: *"preveja o churn e coloque o resultado n
 ---
 
 ## Autor
-
-**Jose Maldonado** ([@joseimj](https://github.com/joseimj)) — também autor dos sistemas irmãos [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents), [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) e [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents).
