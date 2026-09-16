@@ -238,9 +238,3 @@ Variables de entorno cruzadas con las cuadrillas hermanas: este repo expone `SEM
 ## 10. Relación con las cuadrillas hermanas
 
 El cierre del triángulo se mantiene: *"predice churn y ponme el resultado en un dashboard semanal"* → el hub secuencia `ds-lab-agents` (scoring a tabla BQ) → esta cuadrilla (Modeler agrega el source, Dashboarder arma el tablero). El `PlanSpec` del hub referencia el FQN de la tabla de scoring; nada viaja inline.
-
----
-
-## Autor
-
-**Jose Maldonado** ([@joseimj](https://github.com/joseimj)) — autor también de los sistemas hermanos [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents), [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) y [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents).
