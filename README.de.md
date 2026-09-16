@@ -238,7 +238,3 @@ Truppübergreifende Umgebungsvariablen: Dieses Repo exponiert `SEMANTIC_ORCHESTR
 Das Dreieck schließt sich weiterhin: *„Sag den Churn voraus und lege das Ergebnis in ein wöchentliches Dashboard"* → der Hub sequenziert `ds-lab-agents` (Scoring in eine BQ-Tabelle) → dieser Trupp (der Modeler fügt die Source hinzu, der Dashboarder baut das Board). Der `PlanSpec` des Hubs referenziert den FQN der Scoring-Tabelle; nichts reist inline.
 
 ---
-
-## Autor
-
-**Jose Maldonado** ([@joseimj](https://github.com/joseimj)) — ebenfalls Autor der Schwester-Systeme [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents), [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) und [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents).
