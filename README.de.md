@@ -4,8 +4,6 @@
 
 **Agenten-Trupp für Self-Service-BI mit [Malloy](https://github.com/malloydata/malloy) als semantischer Schicht, auf Google Cloud.**
 
-Git-native Variante von [`bi-selfservice-agents`](https://github.com/joseimj/bi-selfservice-agents): dieselbe Rolle im Ökosystem (governte Daten → Dashboards), wobei Looker/LookML durch Malloy + Malloy Publisher ersetzt wird. Existiert neben [`bq-adhoc-agents`](https://github.com/joseimj/bq-adhoc-agents) (Long Tail → flüchtiges SQL) und [`ds-lab-agents`](https://github.com/joseimj/ds-lab-agents) (Inferenz und Vorhersage).
-
 Gebaut mit **Google ADK**, bereitgestellt über **A2A** und **A2UI**, orchestriert von **Vertex AI Agent Engine**, mit Spezialisten auf **Cloud Run** (interner Ingress), Governance des semantischen Modells über das Muster **vorschlagen / genehmigen / anwenden** auf Git, und Ausführung mit der Identität des Endnutzers (**EUC**) durchgängig.
 
 ---
